@@ -24,38 +24,21 @@
 	Released under MIT-license by Tero @ RC-Thoughts.com 2016
 	---------------------------------------------------------
 --]]
+collectgarbage()
 --------------------------------------------------------------------------------
 -- Locals for the application
 local switch1, switch2, switch3, switch4, switch5
 local state1, state2, state3, state4, state5 = 0, 0, 0, 0, 0
 local tStamp1, tStamp2, tStamp3, tStamp4, tStamp5 = 0, 0, 0, 0, 0 
 --------------------------------------------------------------------------------
--- Function for translation file-reading
-local function readFile(path) 
-	local f = io.open(path,"r")
-	local lines={}
-	if(f) then
-		while 1 do 
-			local buf=io.read(f,512)
-			if(buf ~= "")then 
-				lines[#lines+1] = buf
-				else
-				break   
-			end   
-		end 
-		io.close(f)
-		return table.concat(lines,"") 
-	end
-end 
---------------------------------------------------------------------------------
 -- Read translations
-local function setLanguage()	
-	local lng=system.getLocale();
-	local file = readFile("Apps/Lang/RCT-Mome.jsn")
-	local obj = json.decode(file)  
-	if(obj) then
-		trans4 = obj[lng] or obj[obj.default]
-	end
+local function setLanguage()
+    local lng=system.getLocale()
+    local file = io.readall("Apps/Lang/RCT-Mome.jsn")
+    local obj = json.decode(file)
+    if(obj) then
+        trans4 = obj[lng] or obj[obj.default]
+    end
 end
 --------------------------------------------------------------------------------
 -- Store changed switch selections
@@ -77,7 +60,7 @@ end
 local function switch4Changed(value)
 	switch4 = value
 	system.pSave("switch4",value)
-end
+    end
 
 local function switch5Changed(value)
 	switch5 = value
@@ -186,6 +169,7 @@ local function loop()
 		state5 = 0
 		system.setControl(7, 0, 0, 0)
 	end
+    collectgarbage()
 end
 --------------------------------------------------------------------------------
 -- Application initialization
@@ -206,9 +190,11 @@ local function init()
 	system.setControl(5, 0, 0, 0)
 	system.setControl(6, 0, 0, 0)
 	system.setControl(7, 0, 0, 0)
+    collectgarbage()
 end
 --------------------------------------------------------------------------------
-momeVersion = "1.6"
+momeVersion = "1.7"
 setLanguage()
+collectgarbage()
 --------------------------------------------------------------------------------
 return {init=init, loop=loop, author="RC-Thoughts", version=momeVersion, name=trans4.appName}
