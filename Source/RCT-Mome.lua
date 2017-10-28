@@ -7,7 +7,7 @@
 	Example: 
 	Switch 1 ON-OFF makes Momentary switch 1 to ON
 	next time used it will be turned off:
-	Switch 1 ON-OFF makes Momentary switc h1 to OFF
+	Switch 1 ON-OFF makes Momentary switch 1 to OFF
 	
 	Time between changes needs to be min. 2 seconds
 	If activating switch is held in ON position app-switch
@@ -16,6 +16,8 @@
 	All momentary switches are OFF when model is loaded.
 	
 	Localisation-file has to be as /Apps/Lang/RCT-Batt.jsn
+    
+    Requires DC/DS-14/16/24 firmware 4.22 or up
 	
 	French translation courtesy from Daniel Memim
 	---------------------------------------------------------
@@ -116,56 +118,56 @@ end
 --------------------------------------------------------------------------------
 -- Runtime functions, read switches, set latching status and control latching switches (outputs)
 local function loop()
-	local tStamp = system.getTime()
+	local tStamp = system.getTimeCounter()
 	local switch1, switch2, switch3, switch4, switch5  = system.getInputsVal(switch1, switch2, switch3, switch4, switch5)
 	
 	if (switch1 == 1 and state1 == 0 and tStamp > tStamp1) then
-		tStamp1 = tStamp + 2
+		tStamp1 = tStamp + 2000
 		state1 = 1
 		system.setControl(3, 1, 0, 0)
 	end
 	if (switch1 == 1 and state1 == 1 and tStamp > tStamp1) then
-		tStamp1 = tStamp + 2
+		tStamp1 = tStamp + 2000
 		state1 = 0
 		system.setControl(3, 0, 0, 0)
 	end
 	if (switch2 == 1 and state2 == 0 and tStamp > tStamp2) then
-		tStamp2 = tStamp + 2
+		tStamp2 = tStamp + 2000
 		state2 = 1
 		system.setControl(4, 1, 0, 0)
 	end
 	if (switch2 == 1 and state2 == 1 and tStamp > tStamp2) then
-		tStamp2 = tStamp + 2
+		tStamp2 = tStamp + 2000
 		state2 = 0
 		system.setControl(4, 0, 0, 0)
 	end
 	if (switch3 == 1 and state3 == 0 and tStamp > tStamp3) then
-		tStamp3 = tStamp + 2
+		tStamp3 = tStamp + 2000
 		state3 = 1
 		system.setControl(5, 1, 0, 0)
 	end
 	if (switch3 == 1 and state3 == 1 and tStamp > tStamp3) then
-		tStamp3 = tStamp + 2
+		tStamp3 = tStamp + 2000
 		state3 = 0
 		system.setControl(5, 0, 0, 0)
 	end
 	if (switch4 == 1 and state4 == 0 and tStamp > tStamp4) then
-		tStamp4 = tStamp + 2
+		tStamp4 = tStamp + 2000
 		state4 = 1
 		system.setControl(6, 1, 0, 0)
 	end
 	if (switch4 == 1 and state4 == 1 and tStamp > tStamp4) then
-		tStamp4 = tStamp + 2
+		tStamp4 = tStamp + 2000
 		state4 = 0
 		system.setControl(6, 0, 0, 0)
 	end
 	if (switch5 == 1 and state5 == 0 and tStamp > tStamp5) then
-		tStamp5 = tStamp + 2
+		tStamp5 = tStamp + 2000
 		state5 = 1
 		system.setControl(7, 1, 0, 0)
 	end
 	if (switch5 == 1 and state5 == 1 and tStamp > tStamp5) then
-		tStamp5 = tStamp + 2
+		tStamp5 = tStamp + 2000
 		state5 = 0
 		system.setControl(7, 0, 0, 0)
 	end
@@ -174,26 +176,28 @@ end
 --------------------------------------------------------------------------------
 -- Application initialization
 local function init()
-	system.registerForm(1,MENU_APPS, trans4.appName,initForm, nil,printForm)
-	system.registerControl(3,trans4.latchSw1,trans4.swCntr1)
-	system.registerControl(4,trans4.latchSw2,trans4.swCntr2)
-	system.registerControl(5,trans4.latchSw3,trans4.swCntr3)
-	system.registerControl(6,trans4.latchSw4,trans4.swCntr4)
-	system.registerControl(7,trans4.latchSw5,trans4.swCntr5)
-	switch1 = system.pLoad("switch1")
-	switch2 = system.pLoad("switch2")
-	switch3 = system.pLoad("switch3")
-	switch4 = system.pLoad("switch4")
-	switch5 = system.pLoad("switch5")
-	system.setControl(3, 0, 0, 0)
-	system.setControl(4, 0, 0, 0)
-	system.setControl(5, 0, 0, 0)
-	system.setControl(6, 0, 0, 0)
-	system.setControl(7, 0, 0, 0)
+    local registerForm,registerControl = system.registerForm,system.registerControl
+    local pLoad,setControl = system.pLoad, system.setControl
+	registerForm(1,MENU_APPS, trans4.appName,initForm, nil,printForm)
+	registerControl(3,trans4.latchSw1,trans4.swCntr1)
+	registerControl(4,trans4.latchSw2,trans4.swCntr2)
+	registerControl(5,trans4.latchSw3,trans4.swCntr3)
+	registerControl(6,trans4.latchSw4,trans4.swCntr4)
+	registerControl(7,trans4.latchSw5,trans4.swCntr5)
+	switch1 = pLoad("switch1")
+	switch2 = pLoad("switch2")
+	switch3 = pLoad("switch3")
+	switch4 = pLoad("switch4")
+	switch5 = pLoad("switch5")
+	setControl(3, 0, 0, 0)
+	setControl(4, 0, 0, 0)
+	setControl(5, 0, 0, 0)
+	setControl(6, 0, 0, 0)
+	setControl(7, 0, 0, 0)
     collectgarbage()
 end
 --------------------------------------------------------------------------------
-momeVersion = "1.7"
+momeVersion = "1.8"
 setLanguage()
 collectgarbage()
 --------------------------------------------------------------------------------
