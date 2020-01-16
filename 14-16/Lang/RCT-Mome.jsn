@@ -1,0 +1,51 @@
+{
+  "default":"en",
+  "en":{
+    "appName":"Momentary to Latching",
+    "swi1":"Switch 1",
+    "swi2":"Switch 2",
+	"swi3":"Switch 3",
+	"swi4":"Switch 4",
+    "latchSts":"Latching status:",
+    "latchSw1":"Latching SW1",
+	"latchSw2":"Latching SW2",
+	"latchSw3":"Latching SW3",
+	"latchSw4":"Latching SW4",
+    "swCntr1":"MO1",
+    "swCntr2":"MO2",
+	"swCntr3":"MO3",
+	"swCntr4":"MO4"
+  },
+  "de":{
+    "appName":"Speicher Schalter",
+    "swi1":"Schalter 1",
+    "swi2":"Schalter 2",
+	"swi3":"Schalter 3",
+	"swi4":"Schalter 4",
+    "latchSts":"Aktueller Status",
+    "latchSw1":"Verriegeln SC1",
+	"latchSw2":"Verriegeln SC2",
+	"latchSw3":"Verriegeln SC3",
+	"latchSw4":"Verriegeln SC4",
+    "swCntr1":"VS1",
+    "swCntr2":"VS2",
+	"swCntr3":"VS3",
+	"swCntr4":"VS4"
+  },
+  "fr":{
+    "appName":"Vérrouillage momentané",
+    "swi1":"Aiguiller 1",
+    "swi2":"Aiguiller 2",
+	"swi3":"Aiguiller 3",
+	"swi4":"Aiguiller 4",
+    "latchSts":"Ètat de inter:",
+    "latchSw1":"Aiguiller VM1",
+	"latchSw2":"Aiguiller VM2",
+	"latchSw3":"Aiguiller VM3",
+	"latchSw4":"Aiguiller VM4",
+    "swCntr1":"VM1",
+    "swCntr2":"VM2",
+	"swCntr3":"VM3",
+	"swCntr4":"VM4"
+  }
+}
